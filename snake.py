@@ -24,7 +24,7 @@ app.title("Snake")
 app.resizable(False, False)     # disallow the user to change the window size
 
 # # STEP 2: canvas
-canvas = tk.Canvas(app, bg = "gray", width = WINDOW_WIDTH, height = WINDOW_HEIGHT, borderwidth = 0, highlightthickness = 0)
+canvas = tk.Canvas(app, bg = "black", width = WINDOW_WIDTH, height = WINDOW_HEIGHT, borderwidth = 0, highlightthickness = 0)
 canvas.pack()
 app.update()
 
@@ -46,13 +46,45 @@ food = Tile(10*TILE_SIZE, 10*TILE_SIZE)
 velocity_x = 0
 velocity_y = 0
 
+# STEP 5:
+def change_direction(event):
+    # print(event)
+    global velocity_x, velocity_y
+    if (event.keysym == "Up" and velocity_y != 1):
+        velocity_x = 0
+        velocity_y = -1
+    elif (event.keysym == "Down" and velocity_y != -1):
+        velocity_x = 0
+        velocity_y = 1
+    elif (event.keysym == "Left" and velocity_x != 1):
+        velocity_x = -1
+        velocity_y = 0
+    elif (event.keysym == "Right" and velocity_x != -1):
+        velocity_x = 1
+        velocity_y = 0
+# STEP 5:
+def move():
+    global snake
+    snake.x += velocity_x * TILE_SIZE
+    snake.y += velocity_y * TILE_SIZE
+
 # STEP 4: draw the snake
 def draw():
-    global snake
+    global snake, food
+    # STEP 5
+    move()  
+    canvas.delete("all")    # every frame, we need to clear the frame
+
+    # draw the food
+    # canvas.create_rectangle(food.x, food.y, food.x+TILE_SIZE, food.y+TILE_SIZE, fill="red")
+    canvas.create_oval(food.x, food.y, food.x+TILE_SIZE, food.y+TILE_SIZE, fill="red")
+    # food.x = random.randint(0, int(WINDOW_WIDTH/TILE_SIZE)-1) * TILE_SIZE
+    # food.y = random.randint(0, int(WINDOW_HEIGHT/TILE_SIZE)-1) * TILE_SIZE
+    # canvas.create_oval(food.x, food.y, food.x+TILE_SIZE, food.y+TILE_SIZE, fill="red")
+    
     # draw the snake
     canvas.create_rectangle(snake.x, snake.y, snake.x+TILE_SIZE, snake.y+TILE_SIZE, fill="lime green")
-    # draw the food
-    canvas.create_rectangle(food.x, food.y, food.x+TILE_SIZE, food.y+TILE_SIZE, fill="red")
+
     # redraws at a frequency
     app.after(100, draw)    # 100ms call the draw function ==> 10 frames per second
 
@@ -60,7 +92,7 @@ def draw():
 draw()
 
 # STEP 5: make the snake move. We need a key listener
-
+app.bind("<KeyRelease>", change_direction)
 
 # (STEP 1) keep this towards the end 
 app.mainloop()
