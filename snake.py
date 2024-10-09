@@ -7,6 +7,7 @@ COLS = 25
 TILE_SIZE = 25
 WINDOW_WIDTH = TILE_SIZE * COLS #25*25 = 625
 WINDOW_HEIGHT = TILE_SIZE * ROWS #25*25 = 625
+DELAY = 100     # delay (in ms) between frames
 
 # STEP 4: create the Tile class for the snake and food
 class Tile:
@@ -66,7 +67,15 @@ def change_direction(event):
 def move():
     global snake
     snake.x += velocity_x * TILE_SIZE
+    if snake.x < 0:
+        snake.x += WINDOW_WIDTH
+    elif snake.x >= WINDOW_WIDTH:
+        snake.x -= WINDOW_WIDTH
     snake.y += velocity_y * TILE_SIZE
+    if snake.y < 0:
+        snake.y += WINDOW_HEIGHT
+    elif snake.y >= WINDOW_HEIGHT:
+        snake.y -= WINDOW_HEIGHT
 
 # STEP 4: draw the snake
 def draw():
@@ -86,7 +95,7 @@ def draw():
     canvas.create_rectangle(snake.x, snake.y, snake.x+TILE_SIZE, snake.y+TILE_SIZE, fill="lime green")
 
     # redraws at a frequency
-    app.after(100, draw)    # 100ms call the draw function ==> 10 frames per second
+    app.after(DELAY, draw)    # 100ms call the draw function ==> 10 frames per second
 
 # STEP 4: run the program
 draw()
