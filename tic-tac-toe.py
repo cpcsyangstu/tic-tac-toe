@@ -2,7 +2,7 @@ import tkinter as tk
 
 def click_tile(row, col):
     global board, current_player
-    board[row][col].config(text=str(col) + "," + str(row))
+    board[row][col].config(text=current_player + " " + str(col) + str(row))
     if current_player == "X":
         current_player = "O"
     else:
@@ -26,8 +26,9 @@ window = tk.Tk()
 window.title("Tic Tac Toe Game")
 # window.resizable(False, False)
 frame = tk.Frame(window)
+frame.grid_propagate(True)
 
-message = tk.Label(frame, text=current_player+"'s turn", font=("Consolas", 20))
+message = tk.Label(frame, text=current_player+"'s turn", font=("Consolas", 30))
 message.grid(row=0, column=0, columnspan=3, sticky='we')
 # set up board
 for row in range(3):
