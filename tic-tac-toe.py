@@ -36,8 +36,8 @@ for row in range(3):
         board[row][col] = tk.Button(frame, text="", font=("Consolas", 50, "bold"), bg=GRAY, fg=BLUE, width=4, height=1, name=str(row)+","+str(col), command=lambda r=row, c=col: click_tile(r, c))
         board[row][col].grid(row=row+1, column=col)
 
-# temp_button = tk.Button(frame, text="")
-# temp_button.config(text="HOLA")
+restart = tk.Button(frame, text="Restart", font=("Consolas", 20, "bold"))
+restart.grid(row=4, column=0, columnspan=3, stick="n")
 
 frame.pack()
 window.mainloop()
