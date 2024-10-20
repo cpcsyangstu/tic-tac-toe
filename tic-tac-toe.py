@@ -9,6 +9,9 @@ def click_tile(row, col):
         current_player = "X" 
     message["text"] = current_player + "'s turn"
 
+def click_restart():
+    print("Restart button clicked.")
+
 board = [[0, 0, 0],
          [0, 0, 0],
          [0, 0, 0]]
@@ -37,7 +40,8 @@ for row in range(3):
         board[row][col] = tk.Button(frame, text="", font=("Consolas", 50, "bold"), bg=GRAY, fg=BLUE, width=4, height=1, name=str(row)+","+str(col), command=lambda r=row, c=col: click_tile(r, c))
         board[row][col].grid(row=row+1, column=col)
 
-restart = tk.Button(frame, text="Restart", font=("Consolas", 20, "bold"))
+restart = tk.Button(frame, text="Restart", font=("Consolas", 20, "bold"), command=lambda : click_restart())
+
 restart.grid(row=4, column=0, columnspan=3, stick="n")
 
 frame.pack()
