@@ -7,7 +7,7 @@ COLS = 25
 TILE_SIZE = 25
 WINDOW_WIDTH = TILE_SIZE * COLS #25*25 = 625
 WINDOW_HEIGHT = TILE_SIZE * ROWS #25*25 = 625
-DELAY = 100     # delay (in ms) between frames
+DELAY = 500     # delay (in ms) between frames
 
 # STEP 4: create the Tile class for the snake and food
 class Tile:

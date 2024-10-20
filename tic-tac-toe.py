@@ -1,14 +1,44 @@
 import tkinter as tk
 
+def click_tile(row, col):
+    global board, current_player
+    board[row][col].config(text=str(col) + "," + str(row))
+    if current_player == "X":
+        current_player = "O"
+    else:
+        current_player = "X" 
+    message["text"] = current_player + "'s turn"
+
+board = [[0, 0, 0],
+         [0, 0, 0],
+         [0, 0, 0]]
+game_over = False
+turn = 0
+current_player = "X"
+BLACK = "#000000"
+GRAY = "#0f0f0f"
+WHITE = "#ffffff"
+RED = "#ff0000"
+GREEN = "#00ff00"
+BLUE = "#0000ff"
+
 window = tk.Tk()
-window.title("Tic Tac Toe")
+window.title("Tic Tac Toe Game")
+# window.resizable(False, False)
+frame = tk.Frame(window)
 
-label = tk.Label(window, text="Hello World!")
-canvas = tk.Canvas(window,bg="black",width=500,height=500)
+message = tk.Label(frame, text=current_player+"'s turn", font=("Consolas", 20))
+message.grid(row=0, column=0, columnspan=3, sticky='we')
+# set up board
+for row in range(3):
+    for col in range(3):
+        board[row][col] = tk.Button(frame, text="", font=("Consolas", 50, "bold"), bg=GRAY, fg=BLUE, width=4, height=1, name=str(row)+","+str(col), command=lambda r=row, c=col: click_tile(r, c))
+        board[row][col].grid(row=row+1, column=col)
 
-label.pack()
-canvas.pack()
+# temp_button = tk.Button(frame, text="")
+# temp_button.config(text="HOLA")
 
+frame.pack()
 window.mainloop()
 
 # board = [['.', '.', '.'],
