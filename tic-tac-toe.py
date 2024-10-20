@@ -28,6 +28,7 @@ window.title("Tic Tac Toe Game")
 frame = tk.Frame(window)
 frame.grid_propagate(True)
 # tkinter grid usage: https://pythonroadmap.com/blog/tkinter-grid-manager-tutorial
+# tkinter font usage: https://www.tutorialspoint.com/how-to-set-font-for-text-in-tkinter
 message = tk.Label(frame, text=current_player+"'s turn", font=("Consolas", 30))
 message.grid(row=0, column=0, columnspan=3, sticky='we')
 # set up board
