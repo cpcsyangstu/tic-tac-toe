@@ -27,7 +27,7 @@ BLUE = "#0000ff"
 
 window = tk.Tk()
 window.title("Tic Tac Toe Game")
-# window.resizable(False, False)
+window.resizable(False, False)
 frame = tk.Frame(window)
 frame.grid_propagate(True)
 # tkinter grid usage: https://pythonroadmap.com/blog/tkinter-grid-manager-tutorial
